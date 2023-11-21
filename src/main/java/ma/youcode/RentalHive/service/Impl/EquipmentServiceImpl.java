@@ -75,7 +75,6 @@ public class EquipmentServiceImpl implements IEquipmentService {
         }
     }
 
-
     @Override
     public void deleteEquipmentById(Long id) {
         try{
