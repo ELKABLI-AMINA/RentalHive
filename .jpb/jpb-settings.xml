@@ -16,7 +16,7 @@
     <persistence-units>
       <persistence-unit name="Default">
         <packages>
-          <package value="ma.youcode.RentalHive" />
+          <package value="ma.youcode.batispro" />
         </packages>
       </persistence-unit>
     </persistence-units>
