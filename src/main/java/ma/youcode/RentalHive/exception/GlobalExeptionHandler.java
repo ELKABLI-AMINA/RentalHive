@@ -15,7 +15,7 @@ import java.time.format.DateTimeFormatter;
 @Slf4j
 public class GlobalExeptionHandler {
 
-@ExceptionHandler({EquipmentNotFoundException.class, DossierNotFoundException.class})
+@ExceptionHandler({EquipmentNotFoundException.class, DossierNotFoundException.class, AgencyNotFoundException.class})
     public ResponseEntity<ErrorResponse> handleEquipmentNotFoundException(Exception ex, HttpServletRequest request){
 
     ErrorResponse errorResponse = new ErrorResponse(

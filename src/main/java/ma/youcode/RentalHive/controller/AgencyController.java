@@ -6,6 +6,7 @@ import ma.youcode.RentalHive.dto.AgencyDTO.AgencyCreateAndUpdateRequestDTO;
 import ma.youcode.RentalHive.dto.AgencyDTO.AgencyResponseDTO;
 import ma.youcode.RentalHive.dto.equipmentDTO.EquipmentCreationRequestDTO;
 import ma.youcode.RentalHive.dto.equipmentDTO.EquipmentResponseDTO;
+import ma.youcode.RentalHive.exception.AgencyNotFoundException;
 import ma.youcode.RentalHive.service.IAgencyService;
 import ma.youcode.RentalHive.service.Impl.AgencyServiceImpl;
 import org.springframework.http.HttpStatus;
@@ -44,13 +45,13 @@ public class AgencyController {
 //    }
 
     @PostMapping
-    public ResponseEntity<AgencyResponseDTO> createAgency(@Valid @RequestBody AgencyCreateAndUpdateRequestDTO requestDTO){
+    public ResponseEntity<AgencyResponseDTO> createAgency(@Valid @RequestBody AgencyCreateAndUpdateRequestDTO requestDTO) throws AgencyNotFoundException {
         AgencyResponseDTO createAgency = AgencyService.createAgency(requestDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(createAgency);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<AgencyResponseDTO> updateAgency(@Valid @PathVariable Long id, @Valid @RequestBody AgencyCreateAndUpdateRequestDTO requestDTO){
+    public ResponseEntity<AgencyResponseDTO> updateAgency(@Valid @PathVariable Long id, @Valid @RequestBody AgencyCreateAndUpdateRequestDTO requestDTO) throws AgencyNotFoundException {
         AgencyResponseDTO createAgency = AgencyService.updateAgency(id, requestDTO);
         return ResponseEntity.status(HttpStatus.OK).body(createAgency);
     }

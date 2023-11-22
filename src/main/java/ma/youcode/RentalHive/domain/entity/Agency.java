@@ -14,7 +14,7 @@ public class Agency {
     private Long id;
     private String local;
     @Column(columnDefinition = "BIT(1) DEFAULT 1")
-    private Boolean is_enabled = true;
+    private Boolean is_enabled;
     @ManyToOne
     @JoinColumn(name = "director_id")
     private Client client;
