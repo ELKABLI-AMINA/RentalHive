@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import ma.youcode.batispro.dto.AgencyDTO.AgencyCreateAndUpdateRequestDTO;
 import ma.youcode.batispro.dto.AgencyDTO.AgencyResponseDTO;
+import ma.youcode.batispro.exception.AgencyNotFoundException;
 import ma.youcode.batispro.service.IAgencyService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -41,13 +42,13 @@ public class AgencyController {
 //    }
 
     @PostMapping
-    public ResponseEntity<AgencyResponseDTO> createAgency(@Valid @RequestBody AgencyCreateAndUpdateRequestDTO requestDTO){
+    public ResponseEntity<AgencyResponseDTO> createAgency(@Valid @RequestBody AgencyCreateAndUpdateRequestDTO requestDTO) throws AgencyNotFoundException, AgencyNotFoundException {
         AgencyResponseDTO createAgency = AgencyService.createAgency(requestDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(createAgency);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<AgencyResponseDTO> updateAgency(@Valid @PathVariable Long id, @Valid @RequestBody AgencyCreateAndUpdateRequestDTO requestDTO){
+    public ResponseEntity<AgencyResponseDTO> updateAgency(@Valid @PathVariable Long id, @Valid @RequestBody AgencyCreateAndUpdateRequestDTO requestDTO) throws AgencyNotFoundException {
         AgencyResponseDTO createAgency = AgencyService.updateAgency(id, requestDTO);
         return ResponseEntity.status(HttpStatus.OK).body(createAgency);
     }

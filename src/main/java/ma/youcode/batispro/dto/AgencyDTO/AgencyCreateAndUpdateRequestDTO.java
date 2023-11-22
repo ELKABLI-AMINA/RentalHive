@@ -7,8 +7,13 @@ import ma.youcode.batispro.domain.entity.Client;
 import javax.validation.constraints.NotNull;
 
 @Builder
-public record AgencyCreateAndUpdateRequestDTO(@NotNull String local, Boolean is_enabled, Client client) {
-    public static Agency agencyFromAgencyCreateDTO(){
+public record AgencyCreateAndUpdateRequestDTO(@NotNull String local, Boolean is_enabled, @NotNull Client client) {
+    public static Agency agencyFromAgencyCreateDTO(AgencyCreateAndUpdateRequestDTO agency){
+//        return Agency.builder()
+//                        .local(agency.local)
+//                .is_enabled(agency.is_enabled)
+//                .client(agency.client)
+//                .build();
         return null;
     }
 
