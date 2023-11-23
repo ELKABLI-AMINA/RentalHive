@@ -59,7 +59,6 @@ public class LocationService implements ILocationService {
                             .filter(eu -> eu.getEquipmentStatus().equals(EquipmentStatus.valueOf(lr.status())))
                             .map(EquipmentUnit::getQuantity)
                             .reduce(0, Integer::sum);
-
                     if (availableEquipmentUnits < lr.quantity()) {
                         throw new EquipmentNotFoundException("Equipment out of stock");
                     }
