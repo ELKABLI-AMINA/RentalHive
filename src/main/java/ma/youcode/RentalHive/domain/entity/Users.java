@@ -20,6 +20,7 @@ public class Users{
     private UserRole UserRole;
     private boolean enable;
 
+
     public Users(String name, String email, ma.youcode.RentalHive.domain.enums.UserRole userRole, boolean enable) {
         this.name = name;
         this.email = email;

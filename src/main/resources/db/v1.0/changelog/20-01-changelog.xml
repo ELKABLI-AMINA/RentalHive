@@ -5,17 +5,19 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.9.xsd"
         objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
-    <changeSet id="1700147450392-1" author="momos (generated)">
+    <property name="uuid.type" value="binary(16)" dbms="mysql"/>
+    <property name="uuid.type" value="UUID" dbms="postgresql"/>
+    <changeSet id="1700523103728-1" author="momos (generated)">
         <createTable tableName="agency">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="pk_agency"/>
             </column>
             <column name="local" type="VARCHAR(255)"/>
-            <column name="is_enabled" type="BOOLEAN"/>
+            <column defaultValueComputed="1" name="is_enabled" type="BIT(1)"/>
             <column name="director_id" type="BIGINT"/>
         </createTable>
     </changeSet>
-    <changeSet id="1700147450392-2" author="momos (generated)">
+    <changeSet id="1700523103728-2" author="momos (generated)">
         <createTable tableName="dossier_location">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="pk_dossierlocation"/>
@@ -26,7 +28,7 @@
             <column name="status" type="VARCHAR(255)"/>
         </createTable>
     </changeSet>
-    <changeSet id="1700147450392-3" author="momos (generated)">
+    <changeSet id="1700523103728-3" author="momos (generated)">
         <createTable tableName="equipment">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="pk_equipment"/>
@@ -38,7 +40,7 @@
             <column name="equipment_status" type="VARCHAR(255)"/>
         </createTable>
     </changeSet>
-    <changeSet id="1700147450392-4" author="momos (generated)">
+    <changeSet id="1700523103728-4" author="momos (generated)">
         <createTable tableName="equipment_agency">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="pk_equipmentagency"/>
@@ -49,7 +51,7 @@
             <column name="equipment_unit_id" type="BIGINT"/>
         </createTable>
     </changeSet>
-    <changeSet id="1700147450392-5" author="momos (generated)">
+    <changeSet id="1700523103728-5" author="momos (generated)">
         <createTable tableName="equipment_unit">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="pk_equipmentunit"/>
@@ -60,21 +62,30 @@
             <column name="equipment_id" type="BIGINT"/>
         </createTable>
     </changeSet>
-    <changeSet id="1700147450392-6" author="momos (generated)">
+    <changeSet id="1700523103728-6" author="momos (generated)">
+        <createTable tableName="equipmentunit_reservation">
+            <column name="equipmentunit_id" type="BIGINT"/>
+            <column name="reservation_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_equipmentunit_reservation"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="1700523103728-7" author="momos (generated)">
         <createTable tableName="reservations">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="pk_reservations"/>
             </column>
             <column name="quantity" type="INT"/>
-            <column name="start_date" type="DATETIME"/>
-            <column name="end_date" type="DATETIME"/>
+            <column name="reference" type="${uuid.type}"/>
+            <column name="start_date" type="DATE"/>
+            <column name="end_date" type="DATE"/>
             <column name="status" type="VARCHAR(255)"/>
             <column name="payment_status" type="VARCHAR(255)"/>
-            <column name="equipment_unit_id" type="BIGINT"/>
+            <column name="equipment_id" type="BIGINT"/>
             <column name="dossier_location_id" type="BIGINT"/>
         </createTable>
     </changeSet>
-    <changeSet id="1700147450392-7" author="momos (generated)">
+    <changeSet id="1700523103728-8" author="momos (generated)">
         <createTable tableName="users">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="pk_users"/>
@@ -91,40 +102,50 @@
             <column name="cin" type="VARCHAR(255)"/>
         </createTable>
     </changeSet>
-    <changeSet id="1700147450392-8" author="momos (generated)">
+    <changeSet id="1700523103728-9" author="momos (generated)">
         <addForeignKeyConstraint baseColumnNames="director_id" baseTableName="agency"
                                  constraintName="FK_AGENCY_ON_DIRECTOR" referencedColumnNames="id"
                                  referencedTableName="users"/>
     </changeSet>
-    <changeSet id="1700147450392-9" author="momos (generated)">
+    <changeSet id="1700523103728-10" author="momos (generated)">
         <addForeignKeyConstraint baseColumnNames="client_id" baseTableName="dossier_location"
                                  constraintName="FK_DOSSIERLOCATION_ON_CLIENT" referencedColumnNames="id"
                                  referencedTableName="users"/>
     </changeSet>
-    <changeSet id="1700147450392-10" author="momos (generated)">
+    <changeSet id="1700523103728-11" author="momos (generated)">
         <addForeignKeyConstraint baseColumnNames="agency_id" baseTableName="equipment_agency"
                                  constraintName="FK_EQUIPMENTAGENCY_ON_AGENCY" referencedColumnNames="id"
                                  referencedTableName="agency"/>
     </changeSet>
-    <changeSet id="1700147450392-11" author="momos (generated)">
+    <changeSet id="1700523103728-12" author="momos (generated)">
         <addForeignKeyConstraint baseColumnNames="equipment_unit_id" baseTableName="equipment_agency"
                                  constraintName="FK_EQUIPMENTAGENCY_ON_EQUIPMENT_UNIT" referencedColumnNames="id"
                                  referencedTableName="equipment_unit"/>
     </changeSet>
-    <changeSet id="1700147450392-12" author="momos (generated)">
+    <changeSet id="1700523103728-13" author="momos (generated)">
         <addForeignKeyConstraint baseColumnNames="equipment_id" baseTableName="equipment_unit"
                                  constraintName="FK_EQUIPMENTUNIT_ON_EQUIPMENT" referencedColumnNames="id"
                                  referencedTableName="equipment"/>
     </changeSet>
-    <changeSet id="1700147450392-13" author="momos (generated)">
+    <changeSet id="1700523103728-14" author="momos (generated)">
         <addForeignKeyConstraint baseColumnNames="dossier_location_id" baseTableName="reservations"
                                  constraintName="FK_RESERVATIONS_ON_DOSSIERLOCATION" referencedColumnNames="id"
                                  referencedTableName="dossier_location"/>
     </changeSet>
-    <changeSet id="1700147450392-14" author="momos (generated)">
-        <addForeignKeyConstraint baseColumnNames="equipment_unit_id" baseTableName="reservations"
-                                 constraintName="FK_RESERVATIONS_ON_EQUIPMENTUNIT" referencedColumnNames="id"
+    <changeSet id="1700523103728-15" author="momos (generated)">
+        <addForeignKeyConstraint baseColumnNames="equipment_id" baseTableName="reservations"
+                                 constraintName="FK_RESERVATIONS_ON_EQUIPMENT" referencedColumnNames="id"
+                                 referencedTableName="equipment"/>
+    </changeSet>
+    <changeSet id="1700523103728-16" author="momos (generated)">
+        <addForeignKeyConstraint baseColumnNames="equipmentunit_id" baseTableName="equipmentunit_reservation"
+                                 constraintName="fk_equres_on_equipment_unit" referencedColumnNames="id"
                                  referencedTableName="equipment_unit"/>
+    </changeSet>
+    <changeSet id="1700523103728-17" author="momos (generated)">
+        <addForeignKeyConstraint baseColumnNames="reservation_id" baseTableName="equipmentunit_reservation"
+                                 constraintName="fk_equres_on_location" referencedColumnNames="id"
+                                 referencedTableName="reservations"/>
     </changeSet>
 
 </databaseChangeLog>

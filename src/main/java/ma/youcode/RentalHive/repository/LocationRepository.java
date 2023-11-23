@@ -13,5 +13,7 @@ import java.util.List;
 public interface LocationRepository extends JpaRepository<Location, Long> {
     List<Location> findByStatus(LocationStatus status);
 
-    List<Location> findByStartDateBetweenOrEndDateBetweenAndEquipmentUnit_EquipmentModelAndStatus(LocalDate startDate, LocalDate endDate, LocalDate startDate1, LocalDate endDate1, String model ,LocationStatus status);
-}
+    List<Location> findByStartDateBetweenAndStatusAndEquipmentUnit_EquipmentModelOrEndDateBetweenAndStatusAndEquipmentUnit_EquipmentModel(
+            LocalDate startDate, LocalDate endDate, LocationStatus status, String model,
+            LocalDate startDate1, LocalDate endDate1, LocationStatus status1, String model1
+    );}

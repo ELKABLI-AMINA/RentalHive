@@ -54,6 +54,7 @@ public class EquipmentServiceImpl implements IEquipmentService {
     @Override
     public EquipmentResponseDTO getEquipmentById(Long id) {
        try {
+           Objects.requireNonNull(id, "Equipment ID must not be null");
            return equipmentRepository.findById(id)
                    .map(EquipmentResponseDTO::fromEquipment)
                    .orElseThrow(()->new EquipmentNotFoundException(String.format("Equipment with id %d not found", id)));

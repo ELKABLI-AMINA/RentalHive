@@ -59,7 +59,6 @@ public class LocationService implements ILocationService {
                             .filter(eu -> eu.getEquipmentStatus().equals(EquipmentStatus.valueOf(lr.status())))
                             .map(EquipmentUnit::getQuantity)
                             .reduce(0, Integer::sum);
-
                     if (availableEquipmentUnits < lr.quantity()) {
                         throw new EquipmentNotFoundException("Equipment out of stock");
                     }
@@ -225,8 +224,8 @@ public class LocationService implements ILocationService {
 
     public boolean checkIfLocationCouldBePlaced(@Valid LocationRequestDto location){
         List<Location> locations = locationRepository.
-                findByStartDateBetweenOrEndDateBetweenAndEquipmentUnit_EquipmentModelAndStatus(location.startDate(), location.endDate(), location.startDate(), location.endDate(),location.equipmentReference(),LocationStatus.ACCEPTED);
-        System.out.println(locations);
+                findByStartDateBetweenAndStatusAndEquipmentUnit_EquipmentModelOrEndDateBetweenAndStatusAndEquipmentUnit_EquipmentModel(location.startDate(), location.endDate(),LocationStatus.ACCEPTED,location.equipmentReference(), location.startDate(), location.endDate(),LocationStatus.ACCEPTED,location.equipmentReference());
+        System.out.println("locations : "+locations.size());
         Integer reservedQuantityFromTheRequiredModel = locations.stream()
                 .map(l -> {
                     Set<LocalDate> reservedDatesForEquipment = getReservedDatesForEquipment(l);

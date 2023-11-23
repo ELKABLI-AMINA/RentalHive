@@ -113,7 +113,7 @@ class LocationServiceImplTest {
                 )
                 .build();
         when(locationRepository
-                .findByStartDateBetweenOrEndDateBetweenAndEquipmentUnit_EquipmentModelAndStatus(startDate,endDate,startDate,endDate, model,LocationStatus.ACCEPTED))
+                .findByStartDateBetweenAndStatusAndEquipmentUnit_EquipmentModelOrEndDateBetweenAndStatusAndEquipmentUnit_EquipmentModel(startDate,endDate,LocationStatus.ACCEPTED,model,startDate,endDate, LocationStatus.ACCEPTED,model))
                 .thenReturn(existReservations);
         when(equipmentRepository
                 .findByModel(model))
@@ -121,7 +121,7 @@ class LocationServiceImplTest {
 
         boolean result = locationService.checkIfLocationCouldBePlaced(locationRequest);
 
-        verify(locationRepository).findByStartDateBetweenOrEndDateBetweenAndEquipmentUnit_EquipmentModelAndStatus(startDate, endDate, startDate, endDate, model, LocationStatus.ACCEPTED);
+        verify(locationRepository).findByStartDateBetweenAndStatusAndEquipmentUnit_EquipmentModelOrEndDateBetweenAndStatusAndEquipmentUnit_EquipmentModel(startDate, endDate,LocationStatus.ACCEPTED,model, startDate, endDate, LocationStatus.ACCEPTED,model );
         verify(equipmentRepository).findByModel(model);
         assertTrue(result);
     }

@@ -28,9 +28,9 @@ public class Location {
     @Enumerated(EnumType.STRING)
     private PaymentStatus paymentStatus;
     @ManyToOne()
-    @JoinTable(name = "equipment_unit_location",
-            joinColumns = @JoinColumn(name = "location_id"),
-            inverseJoinColumns = @JoinColumn(name = "equipment_unit_id"))
+    @JoinTable(name = "equipmentunit_reservation",
+            joinColumns = @JoinColumn(name = "reservation_id"),
+            inverseJoinColumns = @JoinColumn(name = "equipmentunit_id"))
     private EquipmentUnit equipmentUnit;
 
     @ManyToOne

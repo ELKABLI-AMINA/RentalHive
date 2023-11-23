@@ -32,13 +32,11 @@ public class EquipmentControllerTest {
 
     @Test
     public void test_getAllEquipment() throws Exception {
-        // Arrange
         List<EquipmentResponseDTO> expectedEquipments = new ArrayList<>();
         expectedEquipments.add(new EquipmentResponseDTO(1L, "Equipment 1", EquipmentType.EXCAVATOR, "Model 1", "Description 1", EquipmentStatus.NEW));
         expectedEquipments.add(new EquipmentResponseDTO(2L, "Equipment 2", EquipmentType.BETONNIERE, "Model 2", "Description 2", EquipmentStatus.USED));
         Mockito.when(equipmentService.getAllEquipments()).thenReturn(expectedEquipments);
 
-        // Act and Assert
         mockMvc.perform(get("/v1/equipments")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());

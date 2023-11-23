@@ -19,15 +19,15 @@ public record EquipmentCreationRequestDTO(
         EquipmentStatus equipmentStatus
 
 ) {
-        public static Equipment equipmentFromEquipmentCreationRequestDTO (EquipmentCreationRequestDTO equipment){
-         return new Equipment(
-                 null,
-                 equipment.name,
-                 equipment.equipmentType,
-                 equipment.model,
-                 equipment.description,
-                 equipment.equipmentStatus
+    public static Equipment equipmentFromEquipmentCreationRequestDTO(EquipmentCreationRequestDTO equipment) {
+        return new Equipment(
+                null,
+                equipment.name,
+                equipment.equipmentType,
+                equipment.model,
+                equipment.description,
+                equipment.equipmentStatus
 
-         );
-        }
+        );
+    }
 }
