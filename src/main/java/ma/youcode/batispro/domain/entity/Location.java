@@ -23,8 +23,6 @@ public class Location {
     private LocalDate startDate;
     @Column(name = "end_date")
     private LocalDate endDate;
-    @Enumerated(EnumType.STRING)
-    private LocationStatus status;
     @ManyToOne()
     @JoinTable(name = "equipmentunit_reservation",
             joinColumns = @JoinColumn(name = "reservation_id"),
@@ -34,6 +32,5 @@ public class Location {
     @ManyToOne
     private Equipment equipment;
 
-    @ManyToOne
-    private DossierLocation dossierLocation;
+
 }

@@ -13,17 +13,18 @@ public class BillDtoMapper {
 
 
     public BillDto mapToDto(Bill bill){
-        return BillDto.builder()
-                .billNumber(bill.getBillNumber())
-                .creationDate(bill.getDateCreation().toString())
-                .billStatus(bill.getStatus().toString())
-                .billTotal(bill.getTotal().toString())
-                .billPaymentStatus(bill.getPaymentStatus().toString())
-                .clientEmail(bill.getClient().getEmail())
-                .clientName(bill.getClient().getName())
-                .dossierNumber(bill.getDossierLocation().getDossierNumber())
-                .billDetails(billDetailsDtoMapper.mapToDto(bill))
-                .build();
+//        return BillDto.builder()
+//                .billNumber(bill.getBillNumber())
+//                .creationDate(bill.getDateCreation().toString())
+//                .billStatus(bill.getStatus().toString())
+//                .billTotal(bill.getTotal().toString())
+//                .billPaymentStatus(bill.getPaymentStatus().toString())
+//                .clientEmail(bill.getClient().getEmail())
+//                .clientName(bill.getClient().getName())
+//                .dossierNumber(bill.getDossierLocation().getDossierNumber())
+//                .billDetails(billDetailsDtoMapper.mapToDto(bill))
+//                .build();
+        return null;
 
 
 

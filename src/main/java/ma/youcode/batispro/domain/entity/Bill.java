@@ -39,13 +39,13 @@ public class Bill {
     private DossierLocation dossierLocation;
 
 
-    public Double getTotal(){
-        Objects.requireNonNull(dossierLocation);
-        return dossierLocation.getLocation()
-                .stream()
-                .map(location -> location.getEquipment().getLocationPrice() * location.getQuantity())
-                .reduce(0.0, Double::sum);
-    }
+//    public Double getTotal(){
+//        Objects.requireNonNull(dossierLocation);
+//        return dossierLocation.getLocation()
+//                .stream()
+//                .map(location -> location.getEquipment().getLocationPrice() * location.getQuantity())
+//                .reduce(0.0, Double::sum);
+//    }
 
 
 

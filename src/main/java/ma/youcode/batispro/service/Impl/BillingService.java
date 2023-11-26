@@ -41,10 +41,15 @@ public class BillingService implements IBillingService {
 
     @Override
     public List<BillDto> getAllBillsByStatus(BillStatus status, Pageable pageable) {
-        return StreamSupport.stream(billingRepository.findByStatus(status, pageable).spliterator(), false)
-                .map(billDtoMapper::mapToDto)
-                .toList();
+        return null;
     }
+
+//    @Override
+//    public List<BillDto> getAllBillsByStatus(BillStatus status, Pageable pageable) {
+//        return StreamSupport.stream(billingRepository.findByStatus(status, pageable).spliterator(), false)
+//                .map(billDtoMapper::mapToDto)
+//                .toList();
+//    }
 
     @Override
     public BillDto getBillByNumber(String billNumber) {
@@ -55,21 +60,26 @@ public class BillingService implements IBillingService {
 
     @Override
     public BillDto createBill(String dossierNumber) throws DossierNotFoundException {
-        DossierLocation folder = locationService.findLocationFolderByNumber(dossierNumber);
-        List<Location> list = folder.getLocation().parallelStream().filter(location -> location.getStatus().equals(LocationStatus.ACCEPTED))
-                .toList();
-        if(list.isEmpty()) throw new BillingCreationException("Cannot generate a bill for a dossier that has no accepted reservations");
-        Bill bill = Bill.builder()
-                .dateConfirmation(LocalDateTime.now())
-                .billNumber("BILL-" + LocalDateTime.now().getNano())
-                .client(folder.getClient())
-                .dossierLocation(folder)
-                .status(BillStatus.CREATED)
-                .paymentStatus(PaymentStatus.PENDING)
-                .build();
-        Bill billSaved = billingRepository.save(bill);
-        return billDtoMapper.mapToDto(billSaved);
+        return null;
     }
+
+//    @Override
+//    public BillDto createBill(String dossierNumber) throws DossierNotFoundException {
+//        DossierLocation folder = locationService.findLocationFolderByNumber(dossierNumber);
+//        List<Location> list = folder.getLocation().parallelStream().filter(location -> location.getStatus().equals(LocationStatus.ACCEPTED))
+//                .toList();
+//        if(list.isEmpty()) throw new BillingCreationException("Cannot generate a bill for a dossier that has no accepted reservations");
+//        Bill bill = Bill.builder()
+//                .dateConfirmation(LocalDateTime.now())
+//                .billNumber("BILL-" + LocalDateTime.now().getNano())
+//                .client(folder.getClient())
+//                .dossierLocation(folder)
+//                .status(BillStatus.CREATED)
+//                .paymentStatus(PaymentStatus.PENDING)
+//                .build();
+//        Bill billSaved = billingRepository.save(bill);
+//        return billDtoMapper.mapToDto(billSaved);
+//    }
 
     @Override
     public BillDto updateBill(String billNumber, BillStatus billStatus) {

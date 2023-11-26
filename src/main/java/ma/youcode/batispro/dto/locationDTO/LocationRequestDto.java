@@ -11,11 +11,10 @@ import java.util.UUID;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public record LocationRequestDto (
         UUID reference,
-        @NotEmpty String equipmentReference,
+        @NotEmpty String model,
         @NotEmpty Integer quantity,
         @NotEmpty LocalDate startDate,
         @NotEmpty LocalDate endDate,
-        @NotEmpty String status,
-        @NotEmpty String paymentStatus
+        @NotEmpty String status
 ){
 }

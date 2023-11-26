@@ -11,11 +11,10 @@ public class LocationCreationRequestDtoMapper {
     public LocationRequestDto mapToDto(Location location){
         return LocationRequestDto.builder()
                 .reference(location.getReference())
-                .status(location.getStatus().toString())
                 .startDate(location.getStartDate())
                 .endDate(location.getEndDate())
                 .quantity(location.getQuantity())
-                .equipmentReference(location.getEquipment().getModel())
+                .model(location.getEquipment().getModel())
                 .build();
     }
 }

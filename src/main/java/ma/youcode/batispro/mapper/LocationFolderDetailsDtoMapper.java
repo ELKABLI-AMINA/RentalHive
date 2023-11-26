@@ -15,22 +15,22 @@ public class LocationFolderDetailsDtoMapper {
 
 
 
-    public LocationFolderDetailsDto mapToDto(DossierLocation dossierLocation){
-        List<LocationRequestDto> locationRequestDtos = dossierLocation.getLocation()
-                .stream()
-                .map(locationCreationRequestDtoMapper::mapToDto)
-                .toList();
-        return LocationFolderDetailsDto.builder()
-                .dateSubmission(dossierLocation.getDateCreation().toString())
-                .locationDetails(
-                        LocationDetailsDto.builder()
-                                .locationRequest(
-                                        LocationCreationRequestDto.builder()
-                                                .locationRequests(locationRequestDtos
-                                                ).build()
-                                ).status(dossierLocation.getStatus())
-                                .build()
-                )
-                .build();
-    }
+//    public LocationFolderDetailsDto mapToDto(DossierLocation dossierLocation){
+//        List<LocationRequestDto> locationRequestDtos = dossierLocation.getLocation()
+//                .stream()
+//                .map(locationCreationRequestDtoMapper::mapToDto)
+//                .toList();
+//        return LocationFolderDetailsDto.builder()
+//                .dateSubmission(dossierLocation.getDateCreation().toString())
+//                .locationDetails(
+//                        LocationDetailsDto.builder()
+//                                .locationRequest(
+//                                        LocationCreationRequestDto.builder()
+//                                                .locationRequests(locationRequestDtos
+//                                                ).build()
+//                                ).status(dossierLocation.getStatus())
+//                                .build()
+//                )
+//                .build();
+//    }
 }

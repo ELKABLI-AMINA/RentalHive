@@ -10,7 +10,9 @@ import java.util.Optional;
 
 @Repository
 public interface BillingRepository extends PagingAndSortingRepository<Bill, Long> {
-    Iterable<Bill> findByStatus(BillStatus status, Pageable pageable);
+//    Iterable<Bill> findByStatus(BillStatus status, Pageable pageable);
 
     Optional<Bill> findByBillNumber(String billNumber);
+
+//    Iterable<Object> findByStatus(BillStatus status, Pageable pageable);
 }

@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.9.xsd"
+        objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
+    <property name="uuid.type" value="binary(16)" dbms="mysql"/>
+    <property name="uuid.type" value="UUID" dbms="postgresql"/>
+    <changeSet id="1701017717604-1" author="Shadowgks (generated)">
+        <createTable tableName="agency">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_agency"/>
+            </column>
+            <column name="local" type="VARCHAR(255)"/>
+            <column defaultValueComputed="1" name="is_enabled" type="BIT(1)"/>
+            <column name="director_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="1701017717604-2" author="Shadowgks (generated)">
+        <createTable tableName="bill">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_bill"/>
+            </column>
+            <column name="bill_number" type="VARCHAR(255)"/>
+            <column name="date_creation" type="DATETIME"/>
+            <column name="status" type="VARCHAR(255)"/>
+            <column name="payment_status" type="SMALLINT"/>
+            <column name="date_confirmation" type="DATETIME"/>
+            <column name="comment" type="VARCHAR(255)"/>
+            <column name="bill_details_id" type="BIGINT"/>
+            <column name="client_id" type="BIGINT"/>
+            <column name="dossier_location_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="1701017717604-3" author="Shadowgks (generated)">
+        <createTable tableName="bill_details">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_billdetails"/>
+            </column>
+            <column name="total_price" type="DOUBLE"/>
+            <column name="price_unit" type="DOUBLE"/>
+            <column name="quantity" type="INT"/>
+            <column name="bill_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="1701017717604-4" author="Shadowgks (generated)">
+        <createTable tableName="dossier_location">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_dossierlocation"/>
+            </column>
+            <column name="dossier_number" type="VARCHAR(255)"/>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="date_creation" type="DATETIME"/>
+            <column name="client_id" type="BIGINT"/>
+            <column name="status" type="VARCHAR(255)"/>
+            <column name="location_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="1701017717604-5" author="Shadowgks (generated)">
+        <createTable tableName="equipment">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_equipment"/>
+            </column>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="equipment_type" type="VARCHAR(255)"/>
+            <column name="model" type="VARCHAR(255)"/>
+            <column name="description" type="VARCHAR(255)"/>
+            <column name="location_price" type="DOUBLE"/>
+            <column name="equipment_status" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="1701017717604-6" author="Shadowgks (generated)">
+        <createTable tableName="equipment_agency">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_equipmentagency"/>
+            </column>
+            <column name="quantity" type="INT"/>
+            <column name="location_price" type="DOUBLE"/>
+            <column name="agency_id" type="BIGINT"/>
+            <column name="equipment_unit_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="1701017717604-7" author="Shadowgks (generated)">
+        <createTable tableName="equipment_unit">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_equipmentunit"/>
+            </column>
+            <column name="ref" type="VARCHAR(255)"/>
+            <column name="quantity" type="INT"/>
+            <column name="equipment_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="1701017717604-8" author="Shadowgks (generated)">
+        <createTable tableName="equipmentunit_reservation">
+            <column name="equipmentunit_id" type="BIGINT"/>
+            <column name="reservation_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_equipmentunit_reservation"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="1701017717604-9" author="Shadowgks (generated)">
+        <createTable tableName="reservations">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_reservations"/>
+            </column>
+            <column name="quantity" type="INT"/>
+            <column name="reference" type="${uuid.type}"/>
+            <column name="start_date" type="DATE"/>
+            <column name="end_date" type="DATE"/>
+            <column name="equipment_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="1701017717604-10" author="Shadowgks (generated)">
+        <createTable tableName="users">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_users"/>
+            </column>
+            <column name="dtype" type="VARCHAR(31)"/>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="email" type="VARCHAR(255)"/>
+            <column name="user_role" type="VARCHAR(255)"/>
+            <column name="enable" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="address" type="VARCHAR(255)"/>
+            <column name="phone" type="VARCHAR(255)"/>
+            <column name="cin" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="1701017717604-11" author="Shadowgks (generated)">
+        <addForeignKeyConstraint baseColumnNames="director_id" baseTableName="agency"
+                                 constraintName="FK_AGENCY_ON_DIRECTOR" referencedColumnNames="id"
+                                 referencedTableName="users"/>
+    </changeSet>
+    <changeSet id="1701017717604-12" author="Shadowgks (generated)">
+        <addForeignKeyConstraint baseColumnNames="bill_id" baseTableName="bill_details"
+                                 constraintName="FK_BILLDETAILS_ON_BILL" referencedColumnNames="id"
+                                 referencedTableName="bill"/>
+    </changeSet>
+    <changeSet id="1701017717604-13" author="Shadowgks (generated)">
+        <addForeignKeyConstraint baseColumnNames="bill_details_id" baseTableName="bill"
+                                 constraintName="FK_BILL_ON_BILLDETAILS" referencedColumnNames="id"
+                                 referencedTableName="bill_details"/>
+    </changeSet>
+    <changeSet id="1701017717604-14" author="Shadowgks (generated)">
+        <addForeignKeyConstraint baseColumnNames="client_id" baseTableName="bill" constraintName="FK_BILL_ON_CLIENT"
+                                 referencedColumnNames="id" referencedTableName="users"/>
+    </changeSet>
+    <changeSet id="1701017717604-15" author="Shadowgks (generated)">
+        <addForeignKeyConstraint baseColumnNames="dossier_location_id" baseTableName="bill"
+                                 constraintName="FK_BILL_ON_DOSSIERLOCATION" referencedColumnNames="id"
+                                 referencedTableName="dossier_location"/>
+    </changeSet>
+    <changeSet id="1701017717604-16" author="Shadowgks (generated)">
+        <addForeignKeyConstraint baseColumnNames="client_id" baseTableName="dossier_location"
+                                 constraintName="FK_DOSSIERLOCATION_ON_CLIENT" referencedColumnNames="id"
+                                 referencedTableName="users"/>
+    </changeSet>
+    <changeSet id="1701017717604-17" author="Shadowgks (generated)">
+        <addForeignKeyConstraint baseColumnNames="location_id" baseTableName="dossier_location"
+                                 constraintName="FK_DOSSIERLOCATION_ON_LOCATION" referencedColumnNames="id"
+                                 referencedTableName="reservations"/>
+    </changeSet>
+    <changeSet id="1701017717604-18" author="Shadowgks (generated)">
+        <addForeignKeyConstraint baseColumnNames="agency_id" baseTableName="equipment_agency"
+                                 constraintName="FK_EQUIPMENTAGENCY_ON_AGENCY" referencedColumnNames="id"
+                                 referencedTableName="agency"/>
+    </changeSet>
+    <changeSet id="1701017717604-19" author="Shadowgks (generated)">
+        <addForeignKeyConstraint baseColumnNames="equipment_unit_id" baseTableName="equipment_agency"
+                                 constraintName="FK_EQUIPMENTAGENCY_ON_EQUIPMENT_UNIT" referencedColumnNames="id"
+                                 referencedTableName="equipment_unit"/>
+    </changeSet>
+    <changeSet id="1701017717604-20" author="Shadowgks (generated)">
+        <addForeignKeyConstraint baseColumnNames="equipment_id" baseTableName="equipment_unit"
+                                 constraintName="FK_EQUIPMENTUNIT_ON_EQUIPMENT" referencedColumnNames="id"
+                                 referencedTableName="equipment"/>
+    </changeSet>
+    <changeSet id="1701017717604-21" author="Shadowgks (generated)">
+        <addForeignKeyConstraint baseColumnNames="equipment_id" baseTableName="reservations"
+                                 constraintName="FK_RESERVATIONS_ON_EQUIPMENT" referencedColumnNames="id"
+                                 referencedTableName="equipment"/>
+    </changeSet>
+    <changeSet id="1701017717604-22" author="Shadowgks (generated)">
+        <addForeignKeyConstraint baseColumnNames="equipmentunit_id" baseTableName="equipmentunit_reservation"
+                                 constraintName="fk_equres_on_equipment_unit" referencedColumnNames="id"
+                                 referencedTableName="equipment_unit"/>
+    </changeSet>
+    <changeSet id="1701017717604-23" author="Shadowgks (generated)">
+        <addForeignKeyConstraint baseColumnNames="reservation_id" baseTableName="equipmentunit_reservation"
+                                 constraintName="fk_equres_on_location" referencedColumnNames="id"
+                                 referencedTableName="reservations"/>
+    </changeSet>
+
+</databaseChangeLog>

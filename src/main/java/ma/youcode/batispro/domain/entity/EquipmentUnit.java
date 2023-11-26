@@ -14,8 +14,6 @@ public class EquipmentUnit {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String ref;
-    @Enumerated(EnumType.STRING)
-    private EquipmentStatus equipmentStatus;
     private Integer quantity;
 
     @ManyToOne
@@ -28,7 +26,6 @@ public class EquipmentUnit {
         return "EquipmentUnit{" +
                 "id=" + id +
                 ", ref='" + ref + '\'' +
-                ", equipmentStatus=" + equipmentStatus +
                 ", quantity=" + quantity +
                 '}';
     }

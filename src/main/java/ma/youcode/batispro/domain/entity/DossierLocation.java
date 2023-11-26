@@ -2,13 +2,13 @@ package ma.youcode.batispro.domain.entity;
 
 import lombok.*;
 import ma.youcode.batispro.domain.enums.Location.LocationFolderStatus;
+import ma.youcode.batispro.domain.enums.Location.LocationStatus;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Setter
-@Getter
+@Data
 @Builder
 @AllArgsConstructor @NoArgsConstructor
 @Entity
@@ -22,7 +22,8 @@ public class DossierLocation {
     @ManyToOne(cascade = CascadeType.ALL)
     private Client client ;
     @Enumerated(EnumType.STRING)
-    private LocationFolderStatus status ;
-    @OneToMany(mappedBy = "dossierLocation", cascade = CascadeType.ALL)
-    private List<Location> location ;
+    private LocationStatus status ;
+
+    @ManyToOne
+    private Location Location;
 }

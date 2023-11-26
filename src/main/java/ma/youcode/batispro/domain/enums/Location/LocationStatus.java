@@ -4,6 +4,4 @@ public enum LocationStatus {
     PENDING,
     ACCEPTED,
     REFUSED,
-    CANCELED,
-    RETURNED
 }
